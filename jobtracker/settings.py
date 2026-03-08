@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+import dj_database_url
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -84,18 +88,22 @@ WSGI_APPLICATION = 'jobtracker.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES = {
+#  'default': {
+#      'ENGINE': 'django.db.backends.postgresql',
+#      'NAME': 'jobtracker',
+#      'USER': 'postgres',
+#      'PASSWORD': 'Tharun@2002',
+#      'HOST': 'localhost',
+#      'PORT': '5432',
+#  }
+# }
+
 DATABASES = {
- 'default': {
-     'ENGINE': 'django.db.backends.postgresql',
-     'NAME': 'jobtracker',
-     'USER': 'postgres',
-     'PASSWORD': 'Tharun@2002',
-     'HOST': 'localhost',
-     'PORT': '5432',
- }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
